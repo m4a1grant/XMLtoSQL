@@ -19,7 +19,8 @@ public class Main {
     private static final String dbName = "vladymyr_nagornyi";
     private static final String filePath ="data.xml";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         createDB();
         prepareDB();
         parseXML();
