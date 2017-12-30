@@ -84,43 +84,35 @@ public class Main {
                 while (reader.hasNext()) {
                     XMLEvent event = reader.nextEvent();
                     if (event.isStartElement()){
-                        //StartElement startElement = event.asStartElement();
                         String elementName = event.asStartElement().getName().getLocalPart();
                         switch (elementName.toLowerCase()){
                             case "cd":
                                 parsedCD = new CD();
                                 break;
                             case "title":
-                                //reader.next();
-                                //возможно брать текс напрямую из елемента плохая идея
-                                //
+                                //возможно брать текс напрямую из елемента плохая идея, т.к getElementText()
+                                //делает шаг по дереву документа, который мы не контролируем
                                 parsedCD.setTitle(reader.getElementText());
                                 break;
                             case "artist":
-                                //reader.next();
                                 parsedCD.setArtist(reader.getElementText());
                                 break;
                             case "country":
-                                //reader.next();
                                 parsedCD.setCountry(reader.getElementText());
                                 break;
                             case "company":
-                                //reader.next();
                                 parsedCD.setCompany(reader.getElementText());
                                 break;
                             case "price":
-                                //reader.next();
                                 parsedCD.setPrice(Double.parseDouble(reader.getElementText()));
                                 break;
                             case "year":
-                                //reader.next();
                                 parsedCD.setYear(Integer.parseInt(reader.getElementText()));
                                 break;
                         }
                     }
                     if (event.isEndElement()){
                         if ("cd".equalsIgnoreCase(event.asEndElement().getName().getLocalPart())){
-                            //listOfCDs.add(parsedCD);
                             addToBD(connection, parsedCD);
                         }
                     }
